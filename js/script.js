@@ -55,6 +55,14 @@ var app = new Vue({
     el: '#app',
     data: {
         col: server_data
+    },
+    methods :{
+        toggleEditFormVisibility: function(item){
+            alert('Hello ' + item.data[0].value + '!')
+        },
+        formClosed: function(){
+
+        }
     }
 });
 

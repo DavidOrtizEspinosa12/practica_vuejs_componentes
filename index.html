@@ -3,6 +3,7 @@
 
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>VueJS: Componentes</title>
         <meta name="author" content="">
         <meta name="description" content="">
@@ -12,16 +13,26 @@
 
     <body>
 
-        <h1 id="autor">Autor: TU NOMBRE AQUÍ</h1>
+        <h1 id="autor">Autor: David Ortiz Espinosa</h1>
 
         <!-- https://vuejs.org/v2/guide/index.html -->
         <div id="app">
-            <!--
-                 TODO: Aplicación VueJS. Ver archivo ./js/script.js
-               - Mostrar el título de la colección dentro de un componente Jumbotron de Bootstrap https://getbootstrap.com/docs/4.0/components/jumbotron/. En su interior habrá un <h1> con id "title" que mostrará el título de la colección
-               - Para cada item: (https://vuejs.org/v2/guide/index.html#Conditionals-and-Loops)
-                 - Crear un componente item-data
-            -->
+            <div class="jumbotron jumbotron-fluid">
+                <h1 id="title">{{col.collection.title}}</h1>
+            </div>
+
+            <div class="card-group" style="margin: 20px 10px;">
+                <div class="card" v-for="item in col.collection.items">
+                <div class="card-body">
+                    <dl v-for="data in item.data">
+                        <dt>{{data.prompt}}</dt>
+                        <dd>{{data.value}}</dd>
+                    </dl>
+                    <a v-bind:href="item.href" target="_blanck" class="btn btn-primary">Ver</a>
+                    <input type="button" v-on:click="toggleEditFormVisibility(item)" value="Editar" class="btn">
+                </div>
+                </div>
+            </div>
 
         </div>
 
@@ -29,11 +40,17 @@
 
         <!-- Plantilla para el componente edit-form -->
         <script type="text/x-template" id="editForm">
-
-            <!--
-                 TODO: Componente edit-form
-            -->
-
+            <div class="card-group" style="margin: 20px 10px;">
+                <div class="card">
+                <div class="card-body">
+                    <dl v-for="data in item.data">
+                        <dt>{{data.prompt}}</dt>
+                        <input type="text" >{{data.value}}</dd>
+                    </dl>
+                    <input type="button" v-on:click="formClosed" value="Editar" class="btn btn-primary">
+                </div>
+                </div>
+            </div>
         </script>
 
 
@@ -48,7 +65,8 @@
         </script>
 
 
-        <!-- TODO: Cargar librería VueJS y archivo js/script.js -->
+        <script src="https://unpkg.com/vue"></script>
+        <script src="js/script.js"></script>
 
     </body>
 
