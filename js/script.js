@@ -41,11 +41,29 @@ var server_data = {
 
 // TODO: Componente edit-form
 Vue.component('edit-form', {
+    template: '#editForm',
+    props: {elemento: Object},
+    methods: {
+        closeForm: function(){
 
+        }
+    }
 })
 
 // TODO: Componente item-data
 Vue.component('item-data', {
+    template: "#itemData",
+    props: {elemento: Object},
+    visible: true,
+    methods: {
+        toggleEditFormVisibility: function(itemdata){
+            
+            this.visible = false;
+           
+           alert("La película es: " + itemdata.data[0].value + " y con visibilidad a " + this.visible)
+           return this.visible;
+        } 
+    }
 
 })
 
@@ -55,14 +73,7 @@ var app = new Vue({
     el: '#app',
     data: {
         col: server_data
-    },
-    methods :{
-        toggleEditFormVisibility: function(item){
-            alert('Hello ' + item.data[0].value + '!')
-        },
-        formClosed: function(){
-
-        }
     }
+    
 });
 

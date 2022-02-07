@@ -20,52 +20,48 @@
             <div class="jumbotron jumbotron-fluid">
                 <h1 id="title">{{col.collection.title}}</h1>
             </div>
-
-            <div class="card-group" style="margin: 20px 10px;">
-                <div class="card" v-for="item in col.collection.items">
-                <div class="card-body">
-                    <dl v-for="data in item.data">
-                        <dt>{{data.prompt}}</dt>
-                        <dd>{{data.value}}</dd>
-                    </dl>
-                    <a v-bind:href="item.href" target="_blanck" class="btn btn-primary">Ver</a>
-                    <input type="button" v-on:click="toggleEditFormVisibility(item)" value="Editar" class="btn">
-                </div>
+            <div>
+                <div class="card-group" style="margin: 20px 10px;" v-for="item in col.collection.items">
+                    <div v-if="toggleEditFormVisibility" is="item-data" v-bind:elemento="item"></div>
+                    <div v-else is="edit-form" v-bind:elemento="item"></div>
                 </div>
             </div>
-
         </div>
 
 
 
         <!-- Plantilla para el componente edit-form -->
         <script type="text/x-template" id="editForm">
-            <div class="card-group" style="margin: 20px 10px;">
                 <div class="card">
                 <div class="card-body">
-                    <dl v-for="data in item.data">
+                    <dl v-for="data in elemento.data">
                         <dt>{{data.prompt}}</dt>
-                        <input type="text" >{{data.value}}</dd>
+                        <input v-if="data.prompt != 'Description' " v-model="data.value" type="text">
+                        <textarea v-else v-model="data.value" type="text" ></textarea>
                     </dl>
-                    <input type="button" v-on:click="formClosed" value="Editar" class="btn btn-primary">
+                    <input type="button" v-on:click="closeForm" value="Editar" class="btn btn-primary">
                 </div>
                 </div>
-            </div>
         </script>
 
 
 
         <!-- Plantilla para el componente item-data -->
         <script type="text/x-template" id="itemData">
-
-            <!--
-                 TODO: Componente item-data
-            -->
-
+                <div class="card" >
+                <div class="card-body">
+                    <dl v-for="datos in elemento.data">
+                        <dt>{{datos.prompt}}</dt>
+                        <dd>{{datos.value}}</dd>
+                    </dl>
+                    <a v-bind:href="elemento.href" target="_blanck" class="btn btn-primary">Ver</a>
+                    <input type="button" v-on:click="toggleEditFormVisibility(elemento)" value="Editar" class="btn">
+                </div>
+                </div>
         </script>
 
 
-        <script src="https://unpkg.com/vue"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="js/script.js"></script>
 
     </body>
