@@ -20,7 +20,7 @@
             <div class="jumbotron jumbotron-fluid">
                 <h1 id="title">{{col.collection.title}}</h1>
             </div>
-            <div style="margin: 0 auto; width:80%;">
+            <div style="margin: 0 auto; width:60%;">
                 <div class="card-group" style="margin: 20px 10px;" >
                     <div v-for="item in col.collection.items" v-if="item.visible" is="item-data" v-bind:elemento="item"></div>
                     <div v-else is="edit-form" v-bind:elemento="item"></div>
