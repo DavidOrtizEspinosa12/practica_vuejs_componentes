@@ -15,7 +15,7 @@ var server_data = {
 		                {name : "director", value : "Peter Jackson", prompt : "Director"},
 		                {name : "datePublished", value : "2001-12-19", prompt : "Release Date"}
                 ],
-                visible : true
+                //visible : true
 	          },
 	          {
                 href : "https://en.wikipedia.org/wiki/The_Hunger_Games_(film_series)",
@@ -25,7 +25,7 @@ var server_data = {
 		                {name : "director", value : "Gary Ross", prompt : "Director"},
 		                {name : "datePublished", value : "2012-03-12", prompt : "Release Date"}
                 ],
-                visible : true
+                //visible : true
 	          },
 	          {
                 href : "https://en.wikipedia.org/wiki/Game_of_Thrones",
@@ -35,20 +35,23 @@ var server_data = {
 		                {name : "director", value : "Alan Taylor et al", prompt : "Director"},
 		                {name : "datePublished", value : "2011-04-17", prompt : "Release Date"}
                 ],
-                visible: true
+                //visible: true
 	          }
         ]
     }
 };
 
 
+var array = new Array();
+
 // TODO: Componente edit-form
 Vue.component('edit-form', {
     template: '#editForm',
-    props: {elemento: Object},
+    props: {elemento: Object, posicion: Number},
     methods: {
-        closeForm: function(itemdata){
-            itemdata.visible = true;
+        closeForm: function(posicion /*itemdata*/){
+            //itemdata.visible = true;
+            array.splice(array.indexOf(posicion,1));
         }
     }
 })
@@ -56,14 +59,14 @@ Vue.component('edit-form', {
 // TODO: Componente item-data
 Vue.component('item-data', {
     template: "#itemData",
-    props: {elemento: Object},
+    props: {elemento: Object, posicion: Number},
     methods: {
-        toggleEditFormVisibility: function(itemdata){
+        toggleEditFormVisibility: function(posicion /*itemdata*/){
             
-            itemdata.visible = false;
+            array.push(posicion);
+            //itemdata.visible = false;
         } 
     }
-
 })
 
 // Aplicación VueJS
@@ -71,7 +74,8 @@ Vue.component('item-data', {
 var app = new Vue({
     el: '#app',
     data: {
-        col: server_data
+        col: server_data,
+        lista: array
     }
     
 });

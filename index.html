@@ -22,8 +22,8 @@
             </div>
             <div style="margin: 0 auto; width:80%;">
                 <div class="card-group" style="margin: 20px 10px;" >
-                    <div v-for="item in col.collection.items" v-if="item.visible" is="item-data" v-bind:elemento="item"></div>
-                    <div v-else is="edit-form" v-bind:elemento="item"></div>
+                    <div v-for="item in col.collection.items" is="item-data" v-if="!lista.includes(col.collection.items.indexOf(item))" v-bind:elemento="item" v-bind:posicion="col.collection.items.indexOf(item)"></div>
+                    <div v-else is="edit-form" v-bind:elemento="item" v-bind:posicion="col.collection.items.indexOf(item)"></div>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                         <input v-if="data.prompt != 'Description' " v-model="data.value" type="text">
                         <textarea v-else v-model="data.value" cols="50"></textarea>
                     </dl>
-                    <input type="button" v-on:click="closeForm(elemento)" value="Guardar" class="btn btn-primary">
+                    <input type="button" v-on:click="closeForm(posicion)" value="Guardar" class="btn btn-primary">
                 </div>
                 </div>
         </script>
@@ -55,7 +55,7 @@
                         <dd>{{datos.value}}</dd>
                     </dl>
                     <a v-bind:href="elemento.href" target="_blanck" class="btn btn-primary">Ver</a>
-                    <input type="button" v-on:click="toggleEditFormVisibility(elemento)" value="Editar" class="btn">
+                    <input type="button" v-on:click="toggleEditFormVisibility(posicion)" value="Editar" class="btn">
                 </div>
                 </div>
         </script>
