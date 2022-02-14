@@ -51,7 +51,7 @@ Vue.component('edit-form', {
     methods: {
         closeForm: function(posicion /*itemdata*/){
             //itemdata.visible = true;
-            array.splice(array.indexOf(posicion,1));
+            array.splice(array.indexOf(posicion),1);
         }
     }
 })
